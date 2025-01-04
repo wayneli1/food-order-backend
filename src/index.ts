@@ -20,10 +20,15 @@ cloudinary.config({
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://你的前端域名.onrender.com',  // 替换成你的前端 URL
+    'http://localhost:5173'
+  ],
+  credentials: true
+}));
 
 app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
-
 app.use(express.json());
 
 app.get("/health", async (req: Request, res: Response) => {
@@ -35,6 +40,9 @@ app.use("/api/my/restaurant", myRestaurantRoute);
 app.use("/api/restaurant", restaurantRoute);
 app.use("/api/order", orderRoute);
 
-app.listen(7000, () => {
-  console.log("server started on localhost:7000");
+// 确保 PORT 是数字类型
+const PORT = parseInt(process.env.PORT || '7000', 10);
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
