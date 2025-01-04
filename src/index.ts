@@ -22,7 +22,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'https://你的前端域名.onrender.com',  // 替换成你的前端 URL
+    'https://food-order-frontend-j1jp.onrender.com',  // 替换成你的前端 URL
     'http://localhost:5173'
   ],
   credentials: true
